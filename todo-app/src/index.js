@@ -9,7 +9,7 @@ import Header from "./components/header.js";
 import ToDos from "./components/ToDoContainer.js";
 import Footer from "./components/footer";
 
-const supabase = createClient(
+export const supabase = createClient(
   "https://tmfrjacuxdesxhbblohq.supabase.co",
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRtZnJqYWN1eGRlc3hoYmJsb2hxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDA1OTA4NDcsImV4cCI6MjAxNjE2Njg0N30.0PbY1vh8Y0iN_j4-9wm9WsTi0rTf52TWvDB6RZeV-dc"
 );
@@ -31,15 +31,18 @@ export default function App() {
     return () => subscription.unsubscribe();
   }, []);
 
+  let { data: todos } = supabase.from("todos").select("Todo");
+  console.log(todos);
+
   if (!session) {
     return <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} />;
   } else {
     return (
-      <body>
+      <>
         <Header />
         <ToDos />
         <Footer />
-      </body>
+      </>
     );
   }
 }

@@ -1,4 +1,4 @@
-import Todos from "./todos";
+import Todos from "./ToDos";
 
 // declare the ToDos component
 export default function ToDos() {
