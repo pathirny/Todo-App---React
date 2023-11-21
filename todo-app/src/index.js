@@ -31,15 +31,17 @@ export default function App() {
     return () => subscription.unsubscribe();
   }, []);
 
-  let { data: todos } = supabase.from("todos").select("Todo");
-  console.log(todos);
+  // write the signOut function using supabase
+  function signOut() {
+    supabase.auth.signOut();
+  }
 
   if (!session) {
     return <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} />;
   } else {
     return (
       <>
-        <Header />
+        <Header signout={signOut} />
         <ToDos />
         <Footer />
       </>
