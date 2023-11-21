@@ -6,7 +6,7 @@ import { createClient } from "@supabase/supabase-js";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import Header from "./components/header.js";
-import Main from "./components/header";
+import ToDos from "./components/ToDos";
 import Footer from "./components/header";
 
 const supabase = createClient(
@@ -35,9 +35,10 @@ export default function App() {
     return <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} />;
   } else {
     return (
-      <>
+      <body>
         <Header />
-      </>
+        <ToDos />
+      </body>
     );
   }
 }
