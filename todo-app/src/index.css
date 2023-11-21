@@ -59,3 +59,20 @@ main {
   border-radius: 1rem;
   border: 1px solid var(--neongreen);
 }
+
+footer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: var(--background);
+  border-top: solid 1px var(--neongreen);
+  color: var(--neongreen);
+}
+footer h3 {
+  margin-left: 30rem;
+}
+.socials {
+  width: 5rem;
+  display: flex;
+  justify-content: space-between;
+}
