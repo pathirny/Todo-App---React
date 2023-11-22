@@ -15,13 +15,25 @@ export default function Form() {
   const handleSubmit = async (event) => {
     // prevent the page from reloading
     event.preventDefault();
+    supabase.auth.onAuthStateChange((event, session) => {
+      console.log(event, session);
+    });
+    const { users } = supabase.auth.admin.listUsers();
 
-    console.log(input);
+    if (!users) {
+      console.error("User not authenticated");
+      console.log(users);
+      return;
+    }
 
+    const dataWithUserId = {
+      user_id: users.id,
+      Todo: input,
+    };
     // use supabase query to insert new row
-    const { data, error, auth } = await supabase
+    const { data, error } = await supabase
       .from("todos")
-      .insert([{ Todo: input }])
+      .insert([{ dataWithUserId }])
       .select();
 
     if (error) {
@@ -43,7 +55,9 @@ export default function Form() {
         value={input}
         onChange={(event) => setInput(event.target.value)}
       ></input>
-      <button className="addNew">Add new ToDo</button>
+      <button className="addNew" type="submit">
+        Add new ToDo
+      </button>
     </form>
   );
 }
