@@ -25,6 +25,15 @@ export default function Todos() {
       setTodo(data);
     };
 
+    // async function to add new todo
+    const addNewTodo = async () => {
+      // use supabase query to insert new row
+      const { data } = await supabase
+        .from("todos")
+        .insert([{ some_column: "someValue", other_column: "otherValue" }])
+        .select();
+    };
+
     // call the fetchTodo function
     fetchTodo();
   }, []); // empty dependecy so the useEffect activates as the component mounts
