@@ -36,12 +36,12 @@ export default function Form() {
     if (data) {
       console.log(data);
     }
+    setInput("");
   };
 
   // return the form element
   return (
     <form onSubmit={handleSubmit}>
-      <label htmlFor="text">Add Todo</label>
       <input
         placeholder="Enter your todo..."
         type="text"
