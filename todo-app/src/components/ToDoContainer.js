@@ -1,5 +1,5 @@
 import Todos from "./ToDos";
-
+import Form from "./Form";
 // declare the ToDos component
 export default function ToDos() {
   // this will return all of the todos in a list
@@ -9,7 +9,7 @@ export default function ToDos() {
         {/* individual todos will appear here */}
         <Todos />
       </section>
-      <button className="addNew">Add new ToDo</button>
+      <Form />
     </main>
   );
 }
