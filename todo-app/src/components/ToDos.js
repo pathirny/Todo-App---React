@@ -40,11 +40,13 @@ export default function Todos() {
   // }
 
   async function deleteTodo(todo, userId) {
+    // supabase query for the delete function
     let { error } = await supabase
       .from("todo_list")
       .delete()
       .eq("Todo", todo)
       .eq("user_id", userId);
+    // checking if error occurs if not then filter the existing array
     if (error) {
       console.error("Error deleting todo:", error.message);
     } else {
@@ -53,11 +55,34 @@ export default function Todos() {
     }
   }
 
+  const [input, setInput] = useState("");
+  // create edit function
+  const editTodo = async () => {
+    const id = await supabase.auth.getUser();
+    if (id) {
+      console.log(id);
+    }
+
+    const { data, error } = await supabase
+      .from("todo_list")
+      .update({ Todo: input })
+      .eq("Todo", todo)
+      .select();
+  };
+
   return todo.map((item, index) => (
     <article key={index} className="individualTodo">
       <h4>{item.Todo}</h4>
       <section className="buttons">
         <button>Edit</button>
+        <form className="edit">
+          <input
+            placeholder="Edit the todo..."
+            onChange={(event) => setInput(event.target.value)}
+            value={input}
+            required
+          ></input>
+        </form>
         <button onClick={() => deleteTodo(item.Todo, item.user_id)}>
           Delete
         </button>
