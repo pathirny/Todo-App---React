@@ -49,9 +49,7 @@ export default function Todos() {
       console.error("Error deleting todo:", error.message);
     } else {
       // Update the local state after successful deletion
-      setTodo((prevTodos) =>
-        prevTodos.filter((t) => t.Todo !== todo || t.user_id !== userId)
-      );
+      setTodo((prevTodos) => prevTodos.filter((t) => t.Todo !== todo));
     }
   }
 
