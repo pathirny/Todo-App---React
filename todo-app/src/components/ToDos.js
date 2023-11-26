@@ -29,13 +29,29 @@ export default function Todos() {
     fetchTodo();
   }, []); // empty dependecy so the useEffect activates as the component mounts
 
-  async function deleteTodo(id) {
-    let { error } = await supabase.from("todos").delete().eq("user_id", id);
+  // async function deleteTodo(id) {
+  //   let { error } = await supabase.from("todos").delete().eq("user_id", id);
+  //   if (error) {
+  //     console.error("Error deleting todo:", error.message);
+  //   } else {
+  //     // Update the local state after successful deletion
+  //     setTodo((prevTodo) => prevTodo.filter((todo) => todo.user_id !== id));
+  //   }
+  // }
+
+  async function deleteTodo(todo, userId) {
+    let { error } = await supabase
+      .from("todos")
+      .delete()
+      .eq("Todo", todo)
+      .eq("user_id", userId);
     if (error) {
       console.error("Error deleting todo:", error.message);
     } else {
       // Update the local state after successful deletion
-      setTodo((prevTodo) => prevTodo.filter((todo) => todo.user_id !== id));
+      setTodo((prevTodos) =>
+        prevTodos.filter((t) => t.Todo !== todo || t.user_id !== userId)
+      );
     }
   }
 
@@ -44,7 +60,9 @@ export default function Todos() {
       <h4>{item.Todo}</h4>
       <section className="buttons">
         <button>Edit</button>
-        <button onClick={() => deleteTodo(item.user_id)}>Delete</button>
+        <button onClick={() => deleteTodo(item.Todo, item.user_id)}>
+          Delete
+        </button>
       </section>
     </article>
   ));
