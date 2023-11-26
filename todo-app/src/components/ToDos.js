@@ -17,7 +17,7 @@ export default function Todos() {
     // async function to fetch the todos
     const fetchTodo = async () => {
       //use supabase query to get all data
-      let { data } = await supabase.from("todos").select();
+      let { data } = await supabase.from("todo_list").select();
 
       console.log(data);
 
@@ -41,7 +41,7 @@ export default function Todos() {
 
   async function deleteTodo(todo, userId) {
     let { error } = await supabase
-      .from("todos")
+      .from("todo_list")
       .delete()
       .eq("Todo", todo)
       .eq("user_id", userId);

@@ -25,7 +25,7 @@ export default function Form() {
     // };
     // use supabase query to insert new row
     const { data, error } = await supabase
-      .from("todos")
+      .from("todo_list")
       .insert([{ user_id: id.data.user.id, Todo: input }])
       .select();
 
@@ -37,8 +37,6 @@ export default function Form() {
     }
     setInput("");
   };
-  // create context to pass down to todos - to enable refresh everytime a new todo is added
-  const containerContext = createContext(handleSubmit);
 
   // return the form element
   return (
