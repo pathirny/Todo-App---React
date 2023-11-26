@@ -27,7 +27,7 @@ export default function Todos() {
 
     // call the fetchTodo function
     fetchTodo();
-  }, []); // empty dependecy so the useEffect activates as the component mounts
+  }, todo); // empty dependecy so the useEffect activates as the component mounts
 
   return todo.map((item, index) => (
     <article key={index} className="individualTodo">

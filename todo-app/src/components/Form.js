@@ -1,5 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
-import { useState, useEffect } from "react";
+import { useState, createContext } from "react";
 //store supabase url and key
 const supabaseUrl = "https://tmfrjacuxdesxhbblohq.supabase.co";
 const supabaseKey =
@@ -10,7 +10,6 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 export default function Form() {
   // declare the state
   const [input, setInput] = useState("");
-
   // handle the submit using event
   const handleSubmit = async (event) => {
     // prevent the page from reloading
@@ -38,6 +37,8 @@ export default function Form() {
     }
     setInput("");
   };
+  // create context to pass down to todos - to enable refresh everytime a new todo is added
+  const containerContext = createContext(handleSubmit);
 
   // return the form element
   return (
