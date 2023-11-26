@@ -17,7 +17,7 @@ export default function Todos() {
     // async function to fetch the todos
     const fetchTodo = async () => {
       //use supabase query to get all data
-      let { data } = await supabase.from("todos").select("Todo");
+      let { data } = await supabase.from("todos").select();
 
       console.log(data);
 
@@ -27,14 +27,24 @@ export default function Todos() {
 
     // call the fetchTodo function
     fetchTodo();
-  }, todo); // empty dependecy so the useEffect activates as the component mounts
+  }, []); // empty dependecy so the useEffect activates as the component mounts
+
+  async function deleteTodo(id) {
+    let { error } = await supabase.from("todos").delete().eq("user_id", id);
+    if (error) {
+      console.error("Error deleting todo:", error.message);
+    } else {
+      // Update the local state after successful deletion
+      setTodo((prevTodo) => prevTodo.filter((todo) => todo.user_id !== id));
+    }
+  }
 
   return todo.map((item, index) => (
     <article key={index} className="individualTodo">
       <h4>{item.Todo}</h4>
       <section className="buttons">
         <button>Edit</button>
-        <button>Delete</button>
+        <button onClick={() => deleteTodo(item.user_id)}>Delete</button>
       </section>
     </article>
   ));
