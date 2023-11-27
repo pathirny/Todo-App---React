@@ -57,46 +57,53 @@ export default function Todos() {
 
   const [input, setInput] = useState("");
   // create edit function
-  const editTodo = async (userId) => {
-    const id = await supabase.auth.getUser();
-    if (id) {
-      console.log(id);
-    }
-
+  const editTodo = async (event, item) => {
+    event.preventDefault();
+    console.log(item);
+    // update todo in the supabase database
     const { data, error } = await supabase
       .from("todo_list")
-      .update({ Todo: todo })
-      .eq("Todo", "id")
+      .update({ Todo: input[item.id] }) // Use input[item.id] for the specific todo
+      .eq("id", item.id)
       .select();
 
-    const thingId = data.id;
     if (error) {
       console.log(error);
     }
     if (data) {
-      console.log(thingId);
+      console.log(data);
     }
+    // Clear the input after editing
+    //this line of code updates the input state by clearing the input value for the specific todo item (item.id)
+    setInput((prevInput) => ({ ...prevInput, [item.id]: "" }));
   };
 
-  return todo.map((item, index) => (
-    <article key={index} className="individualTodo">
+  return todo.map((item) => (
+    <article key={item.id} className="individualTodo">
       <h4>{item.Todo}</h4>
       <section className="buttons">
-        <button onClick={editTodo}>Edit</button>
-        <form className="edit">
+        <form className="edit" onSubmit={(event) => editTodo(event, item)}>
           <input
             placeholder="Edit the todo..."
-            onChange={(event) => setInput(event.target.value)}
-            value={input}
+            type="text"
+            value={input[item.id] || ""} // Use input[item.id] for the specific todo
+            // when user types in the input field the input state is updated
+            onChange={(event) =>
+              setInput((prevInput) => ({
+                ...prevInput,
+                [item.id]: event.target.value,
+              }))
+            }
             required
           ></input>
-          <button className="edit" type="submit">
+          {/* <button className="edit" type="submit">
             Send Change
-          </button>
+          </button> */}
         </form>
         <button onClick={() => deleteTodo(item.Todo, item.user_id)}>
           Delete
         </button>
+        {/* <button onClick={() => editTodo(item, index)}>Edit</button> */}
       </section>
     </article>
   ));
