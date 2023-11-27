@@ -57,7 +57,7 @@ export default function Todos() {
 
   const [input, setInput] = useState("");
   // create edit function
-  const editTodo = async () => {
+  const editTodo = async (userId) => {
     const id = await supabase.auth.getUser();
     if (id) {
       console.log(id);
@@ -65,17 +65,25 @@ export default function Todos() {
 
     const { data, error } = await supabase
       .from("todo_list")
-      .update({ Todo: input })
-      .eq("Todo", todo)
+      .update({ Todo: todo })
+      .eq("Todo", "id")
       .select();
+
+    const thingId = data.id;
+    if (error) {
+      console.log(error);
+    }
+    if (data) {
+      console.log(thingId);
+    }
   };
 
   return todo.map((item, index) => (
     <article key={index} className="individualTodo">
       <h4>{item.Todo}</h4>
       <section className="buttons">
-        <button>Edit</button>
-        <form className="edit" onSubmit={editTodo}>
+        <button onClick={editTodo}>Edit</button>
+        <form className="edit">
           <input
             placeholder="Edit the todo..."
             onChange={(event) => setInput(event.target.value)}
