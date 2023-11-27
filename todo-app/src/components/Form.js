@@ -1,5 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
-import { useState, createContext } from "react";
+import { useState } from "react";
 //store supabase url and key
 const supabaseUrl = "https://tmfrjacuxdesxhbblohq.supabase.co";
 const supabaseKey =

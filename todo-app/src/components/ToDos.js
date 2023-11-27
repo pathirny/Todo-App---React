@@ -75,13 +75,16 @@ export default function Todos() {
       <h4>{item.Todo}</h4>
       <section className="buttons">
         <button>Edit</button>
-        <form className="edit">
+        <form className="edit" onSubmit={editTodo}>
           <input
             placeholder="Edit the todo..."
             onChange={(event) => setInput(event.target.value)}
             value={input}
             required
           ></input>
+          <button className="edit" type="submit">
+            Send Change
+          </button>
         </form>
         <button onClick={() => deleteTodo(item.Todo, item.user_id)}>
           Delete
