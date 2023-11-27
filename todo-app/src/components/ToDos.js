@@ -54,8 +54,8 @@ export default function Todos() {
       setTodo((prevTodos) => prevTodos.filter((t) => t.Todo !== todo));
     }
   }
-
   const [input, setInput] = useState("");
+
   // create edit function
   const editTodo = async (event, item) => {
     event.preventDefault();
