@@ -42,9 +42,10 @@ export default function App() {
   } else {
     return (
       <>
-        <ParticlesBackground />
         <Header signout={signOut} />
         <ToDos />
+        <ParticlesBackground />
+
         <Footer />
       </>
     );
