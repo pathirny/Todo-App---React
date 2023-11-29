@@ -108,3 +108,4 @@ export default function Todos() {
     </article>
   ));
 }
+// fix useeffect so page updates everytime new element is added/ changed
