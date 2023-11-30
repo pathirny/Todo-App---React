@@ -8,7 +8,6 @@ import { ThemeSupa } from "@supabase/auth-ui-shared";
 import Header from "./components/header.js";
 import ToDos from "./components/ToDoContainer.js";
 import Footer from "./components/footer";
-import ParticlesBackground from "./components/ParticlesBackground.js";
 
 export const supabase = createClient(
   "https://tmfrjacuxdesxhbblohq.supabase.co",
@@ -44,7 +43,6 @@ export default function App() {
       <>
         <Header signout={signOut} />
         <ToDos />
-        <ParticlesBackground />
 
         <Footer />
       </>
