@@ -16,7 +16,7 @@ export const supabase = createClient(
 
 export default function App() {
   const [session, setSession] = useState(null);
-
+  console.log(typeof session);
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);

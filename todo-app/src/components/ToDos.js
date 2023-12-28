@@ -22,7 +22,7 @@ export default function Todos() {
       console.log(data);
 
       //update todo state with the todo data
-      setTodo(data);
+      setTodo(data.reverse());
     };
 
     // call the fetchTodo function
