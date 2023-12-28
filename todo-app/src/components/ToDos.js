@@ -8,7 +8,10 @@ const supabaseKey =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRtZnJqYWN1eGRlc3hoYmJsb2hxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDA1OTA4NDcsImV4cCI6MjAxNjE2Njg0N30.0PbY1vh8Y0iN_j4-9wm9WsTi0rTf52TWvDB6RZeV-dc";
 const supabase = createClient(supabaseUrl, supabaseKey);
 // define the todos component
-export default function Todos() {
+export default function Todos(props) {
+  const newInput = props.addNewInput;
+  console.log(newInput);
+
   // declare the state
   const [todo, setTodo] = useState([]);
 
@@ -27,7 +30,7 @@ export default function Todos() {
 
     // call the fetchTodo function
     fetchTodo();
-  }, []); // empty dependecy so the useEffect activates as the component mounts
+  }, [newInput]); // empty dependecy so the useEffect activates as the component mounts
 
   // async function deleteTodo(id) {
   //   let { error } = await supabase.from("todos").delete().eq("user_id", id);
