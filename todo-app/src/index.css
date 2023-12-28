@@ -22,9 +22,7 @@ header {
   background-color: var(--background);
   height: 6rem;
   display: flex;
-  justify-content: space-between;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  justify-content: space-evenly;
   align-items: center;
   color: var(--neongreen);
   border-bottom: 1px solid var(--neongreen);
@@ -105,4 +103,11 @@ input {
   background-color: var(--components);
   border: 1px solid var(--neongreen);
   color: white;
+}
+.spotifyWidget {
+  width: 10vw;
+  border: 1px solid var(--neongreen);
+  text-align: center;
+  border-radius: 25px;
+  height: 8vh;
 }

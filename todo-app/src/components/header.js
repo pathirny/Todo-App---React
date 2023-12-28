@@ -1,3 +1,4 @@
+import Widget from "./Widget";
 // declare the header components
 
 // this will return:
@@ -10,7 +11,7 @@ export default function Header(props) {
 
   return (
     <header>
-      <article>WIDGET{/* will return spotify widget here */}</article>
+      <Widget />
       <h2>ToDo App</h2>
       <button onClick={signOut}>Sign Out</button>
     </header>
