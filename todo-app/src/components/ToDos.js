@@ -15,23 +15,6 @@ export default function Todos(props) {
   // declare the state
   const [todo, setTodo] = useState([]);
 
-  // useEffect hook for fetching the todos from supabase when component mounts
-  useEffect(() => {
-    // async function to fetch the todos
-    const fetchTodo = async () => {
-      //use supabase query to get all data
-      let { data } = await supabase.from("todo_list").select();
-
-      console.log(data);
-
-      //update todo state with the todo data
-      setTodo(data.reverse());
-    };
-
-    // call the fetchTodo function
-    fetchTodo();
-  }, [newInput]); // empty dependecy so the useEffect activates as the component mounts
-
   // async function deleteTodo(id) {
   //   let { error } = await supabase.from("todos").delete().eq("user_id", id);
   //   if (error) {
@@ -80,6 +63,23 @@ export default function Todos(props) {
     //this line of code updates the input state by clearing the input value for the specific todo item (item.id)
     setInput((prevInput) => ({ ...prevInput, [item.id]: "" }));
   };
+
+  // useEffect hook for fetching the todos from supabase when component mounts
+  useEffect(() => {
+    // async function to fetch the todos
+    const fetchTodo = async () => {
+      //use supabase query to get all data
+      let { data } = await supabase.from("todo_list").select();
+
+      console.log(data);
+
+      //update todo state with the todo data
+      setTodo(data.reverse());
+    };
+
+    // call the fetchTodo function
+    fetchTodo();
+  }, [newInput, input]); // empty dependecy so the useEffect activates as the component mounts
 
   return todo.map((item) => (
     <article key={item.id} className="individualTodo">
