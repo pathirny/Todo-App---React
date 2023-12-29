@@ -10,7 +10,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 // define the todos component
 export default function Todos(props) {
   const newInput = props.addNewInput;
-  console.log(newInput);
+  // console.log(newInput);
 
   // declare the state
   const [todo, setTodo] = useState([]);
@@ -71,7 +71,7 @@ export default function Todos(props) {
       //use supabase query to get all data
       let { data } = await supabase.from("todo_list").select();
 
-      console.log(data);
+      // console.log(data);
 
       //update todo state with the todo data
       setTodo(data.reverse());
