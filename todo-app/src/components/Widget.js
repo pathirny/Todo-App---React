@@ -1,4 +1,8 @@
-export default function Widget() {
+import React, { useState } from "react";
+
+export default function Widget(props) {
+  const [song, setSong] = useState();
+
   const clientId = "d8a48ebc251748cba27745d97f5cc149";
   const client_secret = "3fe843a2b2304ca897696fbe0a57601f";
 
@@ -19,11 +23,11 @@ export default function Widget() {
   }
   getToken();
 
-  const playlistId = "7nsVaUZVMnwi7bom2hSYMh";
+  const playlistId = "5OPutqODUjt2Y8fdBYTGH0";
   async function getPlaylist(accessToken) {
     console.log(accessToken);
     const response = await fetch(
-      `https://api.spotify.com/v1/playlists/${playlistId}`,
+      `https://api.spotify.com/v1/tracks/${playlistId}`,
       {
         method: "GET",
         headers: { Authorization: "Bearer " + accessToken },
@@ -32,6 +36,33 @@ export default function Widget() {
 
     const songData = await response.json();
     console.log(songData);
+    const songUrl = songData.preview_url;
+    setSong(songUrl);
+    console.log(songUrl);
+    // player(accessToken);
   }
-  return <div className="spotifyWidget"></div>;
+
+  // async function player(accessToken) {
+  //   const player = await fetch("https://api.spotify.com/v1/me/player", {
+  //     method: "GET",
+  //     headers: {
+  //       Authorization: "Bearer " + accessToken,
+  //     },
+  //   });
+
+  //   console.log(player);
+  // }
+
+  const [duration, setDuration] = useState("30s");
+  return (
+    <div className="spotifyWidget">
+      <audio
+        preload="metadata"
+        onDurationChange={(e) => setDuration(e.currentTarget.duration)}
+        autoPlay={true}
+      >
+        <source type="audio/mpeg" src={song} />
+      </audio>
+    </div>
+  );
 }
