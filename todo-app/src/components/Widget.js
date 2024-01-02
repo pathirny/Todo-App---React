@@ -56,13 +56,14 @@ export default function Widget(props) {
   const [duration, setDuration] = useState("30s");
   return (
     <div className="spotifyWidget">
-      <audio
-        preload="metadata"
-        onDurationChange={(e) => setDuration(e.currentTarget.duration)}
-        autoPlay={true}
-      >
-        <source type="audio/mpeg" src={song} />
-      </audio>
+      <iframe
+        title="spotifyPlugin"
+        src="https://open.spotify.com/embed/playlist/7nsVaUZVMnwi7bom2hSYMh?utm_source=generator&theme=0"
+        className="spotifyPlayer"
+        allowfullscreen=""
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy"
+      ></iframe>
     </div>
   );
 }
