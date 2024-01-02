@@ -20,7 +20,7 @@ code {
 
 header {
   background-color: var(--background);
-  height: 6rem;
+  height: 8rem;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -104,10 +104,12 @@ input {
   border: 1px solid var(--neongreen);
   color: white;
 }
-.spotifyWidget {
-  width: 10vw;
+.spotifyPlayer {
   border: 1px solid var(--neongreen);
-  text-align: center;
-  border-radius: 25px;
-  height: 8vh;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  width: 20vw;
+  margin-left: -10vw;
+  height: 4.2vw;
 }
